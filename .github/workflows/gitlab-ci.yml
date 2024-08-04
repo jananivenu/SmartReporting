@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -21,22 +24,24 @@ jobs:
 
     - name: Install Maven
       run: |
-        $MavenUrl = "https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
-        $MavenPath = "$env:GITHUB_WORKSPACE\maven"
-        Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
-        Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
-        Remove-Item -Force "maven.zip"
-        $env:PATH += ";$MavenPath\apache-maven-3.8.4\bin"
-      shell: pwsh
+        curl -L https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip -o maven.zip
+        tar -xf maven.zip
+        move apache-maven-3.8.4 C:\maven
+        setx PATH "%PATH%;C:\maven\bin"
+      shell: powershell
 
     - name: Display Java version
       run: java -version
+      shell: powershell
 
     - name: Display Maven version
       run: mvn -version
+      shell: powershell
 
     - name: Build with Maven
       run: mvn clean install
+      shell: powershell
 
     - name: Run Cucumber Tests
       run: mvn test
+      shell: powershell
