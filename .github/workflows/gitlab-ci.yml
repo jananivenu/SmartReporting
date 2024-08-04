@@ -24,7 +24,7 @@ jobs:
 
     - name: Install Maven
       run: |
-        $MavenUrl = "https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
+        $MavenUrl = "https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip"
         $MavenPath = "$env:GITHUB_WORKSPACE\maven"
         Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
         Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
