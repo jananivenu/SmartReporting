@@ -22,27 +22,8 @@ jobs:
         distribution: 'temurin'
         java-version: '22'
 
-    - name: Install Maven
-      run: |
-        $MavenUrl = "https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.zip"
-        $MavenPath = "$env:GITHUB_WORKSPACE\maven"
-        Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
-        Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
-        Remove-Item -Force "maven.zip"
-        $env:PATH += ";$MavenPath\apache-maven-3.8.8\bin"
-        [Environment]::SetEnvironmentVariable("PATH", $env:PATH, [EnvironmentVariableTarget]::Process)
-      shell: powershell
-
-    - name: Display Java version
-      run: java -version
-      shell: powershell
-
-    - name: Display Maven version
-      run: mvn -version
-      shell: powershell
-
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn -B package --file pom.xml
       shell: powershell
 
     - name: Run Cucumber Tests
