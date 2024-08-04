@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   test:
     runs-on: self-hosted
@@ -18,14 +19,15 @@ jobs:
         distribution: 'temurin'
         java-version: '22'
 
-    - name: Set up Maven
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '22'
-        cache: 'maven'
-        check-latest: true
-        components: 'maven'
+    - name: Install Maven
+      run: |
+        $MavenUrl = "https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
+        $MavenPath = "$env:GITHUB_WORKSPACE\maven"
+        Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
+        Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
+        Remove-Item -Force "maven.zip"
+        $env:PATH += ";$MavenPath\apache-maven-3.8.4\bin"
+      shell: pwsh
 
     - name: Display Java version
       run: java -version
