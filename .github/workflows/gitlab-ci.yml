@@ -29,7 +29,7 @@ jobs:
         Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
         Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
         Remove-Item -Force "maven.zip"
-        $env:PATH += ";$MavenPath\apache-maven-3.8.4\bin"
+        $env:PATH += ";$MavenPath\apache-maven-3.8.8\bin"
         [Environment]::SetEnvironmentVariable("PATH", $env:PATH, [EnvironmentVariableTarget]::Process)
       shell: powershell
 
