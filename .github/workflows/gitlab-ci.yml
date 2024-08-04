@@ -24,10 +24,13 @@ jobs:
 
     - name: Install Maven
       run: |
-        curl -L https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip -o maven.zip
-        tar -xf maven.zip
-        move apache-maven-3.8.4 C:\maven
-        setx PATH "%PATH%;C:\maven\bin"
+        $MavenUrl = "https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip"
+        $MavenPath = "$env:GITHUB_WORKSPACE\maven"
+        Invoke-WebRequest -Uri $MavenUrl -OutFile "maven.zip"
+        Expand-Archive -Path "maven.zip" -DestinationPath $MavenPath
+        Remove-Item -Force "maven.zip"
+        $env:PATH += ";$MavenPath\apache-maven-3.8.4\bin"
+        [Environment]::SetEnvironmentVariable("PATH", $env:PATH, [EnvironmentVariableTarget]::Process)
       shell: powershell
 
     - name: Display Java version
