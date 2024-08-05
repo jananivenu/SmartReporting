@@ -26,6 +26,6 @@ jobs:
       run: mvn -B package --file pom.xml
       shell: powershell
 
-    - name: Run Cucumber Tests
-      run: mvn clean test
+    - name: Run Cucumber Tests 
+      run: mvn -X test
       shell: powershell
