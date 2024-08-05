@@ -8,11 +8,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 
 public class StepDefinitions {
@@ -37,7 +37,7 @@ public class StepDefinitions {
         WebElement button = driver.findElement(By.xpath("//*[contains(text(), 'Add a new computer')]"));
         button.click();
         System.out.println("Add a new computer Button clicked");
-        //throw new PendingException();
+
     }
 
     @When("Enter the computer name field {string}")
@@ -74,7 +74,7 @@ public class StepDefinitions {
 
         String actualString = driver.findElement(By.xpath("//*[contains(text(), 'Computer test has been created')]")).getText();
         String expectedString = "Done ! Computer test has been created";
-        assertTrue(actualString.equals(expectedString));
+        Assert.assertEquals(actualString, expectedString, "Strings are not equal!");
         Thread.sleep(5000);
         System.out.println("A new computer is added to the inventory");
 
@@ -105,7 +105,7 @@ public class StepDefinitions {
         List<WebElement> filteredResult = driver.findElements(By.xpath(xpathExpression));
 //        String actualUpdateString = driver.findElement(By.xpath("//*[contains(text(), 'Computer ACE has been updated')]")).getText();
 //        String expectedUpdateString = "Done ! Computer ACE has been updated";
-//        assertTrue(actualUpdateString.equals(expectedUpdateString));
+//          Assert.assertEquals(actualUpdateString, expectedUpdateString, "Strings are not equal!");
         if(filteredResult.size()>0) {
             System.out.println("filtered list of computer names are displayed below:");
             for (WebElement element : filteredResult) {
@@ -140,7 +140,7 @@ public class StepDefinitions {
     public void computer_details_should_be_updated() {
         String actualUpdateString = driver.findElement(By.xpath("//*[contains(text(), 'Computer ACE has been updated')]")).getText();
         String expectedUpdateString = "Done ! Computer ACE has been updated";
-        assertTrue(actualUpdateString.equals(expectedUpdateString));
+        Assert.assertEquals(actualUpdateString, expectedUpdateString, "Strings are not equal!");
         System.out.println("Computer details are  be updated");
     }
 }
