@@ -1,4 +1,4 @@
-package com.example.stepdefinitions;
+package com.reporting.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
