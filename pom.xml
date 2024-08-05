@@ -77,6 +77,9 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.3.1</version>
           <configuration>
+                  <includes>
+                        <include>**/*TestRunner.java</include>
+                    </includes>
                 <properties>
                     <property>
                         <name>junit.platform.version</name>
