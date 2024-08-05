@@ -23,9 +23,9 @@ jobs:
         java-version: '22'
 
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean install
       shell: powershell
 
     - name: Run Cucumber Tests 
-      run: mvn -X test
+      run: mvn clean test
       shell: powershell
