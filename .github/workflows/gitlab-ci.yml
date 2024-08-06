@@ -29,3 +29,10 @@ jobs:
     - name: Run Cucumber Tests 
       run: mvn clean test
       shell: powershell
+    - name: Archive Test Reports and Screenshots
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-reports-and-screenshots
+        path: |
+          target/screenshots/
