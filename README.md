@@ -6,6 +6,8 @@ https://computer- database.gatling.io/computers
 Task 1) 
 
 I have created feature file with 3 scenarios for automation considering the following user stories (US):
+
+
 •US-01: As an inventory manager, I want to add a computer to the system, including its introduction and discontinuation dates, so I can track product lifecycles, identify outdated equipment, and make informed decisions about purchasing,
 upgrades, and support
 
