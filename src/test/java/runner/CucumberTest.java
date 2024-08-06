@@ -8,8 +8,7 @@ import io.cucumber.junit.CucumberOptions;
 
 import org.junit.runner.RunWith;
 
-@IncludeEngines("cucumber")
-@SelectClasspathResource("com/reporting/stepdefinition")
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
