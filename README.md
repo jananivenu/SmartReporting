@@ -2,6 +2,7 @@ Smart Reporting Demo
 
 I have  prepare Automated Tests for the demo application available at
 https://computer- database.gatling.io/computers
+
 Task 1) 
 
 I have created feature file with 3 scenarios for automation considering the following user stories (US):
