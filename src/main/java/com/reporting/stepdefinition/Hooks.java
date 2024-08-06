@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
 
 import static com.reporting.utils.ScreenShotUtils.takeScreenshot;
@@ -31,7 +32,7 @@ public class Hooks {
     {
         final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(screenshot, "image/png", "screenshot");
-        takeScreenshot(driver, "target/screenshots/screenshot.png");
+        takeScreenshot(driver,  scenario.getName());
         if(driver != null)
         {
             driver.quit();

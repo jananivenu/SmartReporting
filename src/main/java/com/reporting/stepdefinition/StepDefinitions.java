@@ -1,6 +1,7 @@
 package com.reporting.stepdefinition;
 
 
+import com.reporting.utils.ScreenShotUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -77,6 +78,7 @@ public class StepDefinitions {
         assertEquals(actualString, expectedString);
         Thread.sleep(5000);
         System.out.println("A new computer is added to the inventory");
+        ScreenShotUtils.takeScreenshot(driver, "New_Computer_Added");
 
     }
 
@@ -86,14 +88,14 @@ public class StepDefinitions {
         this.computerName = computerName;
         driver.findElement(By.xpath("//input[@type='search' and  @placeholder='Filter by computer name...']")).sendKeys(computerName);
         System.out.println("I search for computer names with min two letters");
-        //throw new io.cucumber.java.PendingException();
+
     }
 
     @When("click Filter by name button")
     public void click_Filter_by_name_button() {
         WebElement filterButton = driver.findElement(By.xpath("//input[@value='Filter by name']"));
         filterButton.click();
-        //throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("filtered list of computer names are displayed containing the searched name")
@@ -114,7 +116,7 @@ public class StepDefinitions {
         }
         else
             System.out.println("No computer names found/Nothing to display");
-        //throw new io.cucumber.java.PendingException();
+        ScreenShotUtils.takeScreenshot(driver, "Computer_Name_found_not_found");
     }
 
     @When("I select on the computer name from list {string}")
@@ -141,6 +143,7 @@ public class StepDefinitions {
         String actualUpdateString = driver.findElement(By.xpath("//*[contains(text(), 'Computer ACE has been updated')]")).getText();
         String expectedUpdateString = "Done ! Computer ACE has been updated";
         assertEquals(actualUpdateString, expectedUpdateString);
-        System.out.println("Computer details are  be updated");
+        System.out.println("Computer details are updated");
+        ScreenShotUtils.takeScreenshot(driver, "Computer_updated");
     }
 }
