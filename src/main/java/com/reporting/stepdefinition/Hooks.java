@@ -2,9 +2,14 @@ package com.reporting.stepdefinition;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import static com.reporting.utils.ScreenShotUtils.takeScreenshot;
 
 public class Hooks {
 
@@ -18,8 +23,11 @@ public class Hooks {
     }
 
     @After
-    public void tearDown()
+    public void tearDown(Scenario scenario)
     {
+        final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot, "image/png", "screenshot");
+        takeScreenshot(driver, "path/to/save/screenshot.png");
         if(driver != null)
         {
             driver.quit();
